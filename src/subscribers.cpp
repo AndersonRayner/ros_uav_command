@@ -1,11 +1,15 @@
 #include "ros_uav_command/testPositioning.h"
 
 #include <math.h>
+#include "mavros_msgs/HomePosition.h"
+#include "geographic_msgs/GeoPointStamped.h"
 
 // Subscribers
 ros::Subscriber homePositionSub;
 ros::Subscriber gpOriginSub;
 
+// Callbacks
+void homePosition_callback(const mavros_msgs::HomePosition::ConstPtr& msg);
 void gpOrigin_callback(const geographic_msgs::GeoPointStamped::ConstPtr &msg);
 
 void init_subscribers(ros::NodeHandle n)
@@ -13,7 +17,7 @@ void init_subscribers(ros::NodeHandle n)
 
   // Initialise subscribers
   homePositionSub = n.subscribe("uav1/mavros/home_position/home"  , 1, homePosition_callback);
-  gpOriginSub     = n.subscribe("uav1/mavros/global_position/gp_origin", 1, gpOrigin_callback);
+  gpOriginSub = n.subscribe("uav1/mavros/global_position/gp_origin", 1, gpOrigin_callback);
 
   return;
 }
@@ -21,17 +25,20 @@ void init_subscribers(ros::NodeHandle n)
 void homePosition_callback(const mavros_msgs::HomePosition::ConstPtr &msg)
 {
   // Subscribes to /mavros/home_position/home
-  home_.longitude = msg->geo.longitude;
-  home_.latitude  = msg->geo.latitude;
-  home_.altitude  = msg->geo.altitude;
+  // Gives the 'home' position of the aircraft (not always at the EKF origin)
+
+  _ekfOrigin.longitude = msg->geo.longitude;
+  _ekfOrigin.latitude  = msg->geo.latitude;
+  _ekfOrigin.altitude  = msg->geo.altitude;
 
   return;
-
 }
 
 
 void gpOrigin_callback(const geographic_msgs::GeoPointStamped::ConstPtr &msg)
 {
+
+  // Callback for processing the EKF Origin message
 
   double rad2deg = (180.0 / M_PI);
 

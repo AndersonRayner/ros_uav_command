@@ -1,15 +1,19 @@
 
 #include "ros_uav_command/testPositioning.h"
+// Script to demonstrate different ways of commanding an ArduPilot 
+// through ROS.
+//
+// Matt Anderson, 2021
 
 uint _counter = 0;
 
-enum positionModeEnum {local, global} positionMode;
+enum commandModeEnum {local, global, attitude} commandMode;
 
 // Node for handling navigation around fumaroles
 int main(int argc, char **argv) {
 
   // Initialise variables
-  positionMode = positionModeEnum::global;
+  commandMode = commandModeEnum::attitude;
 
   // Initialise ROS
   ros::init(argc, argv, "aircraft_positioning");
@@ -22,9 +26,9 @@ int main(int argc, char **argv) {
   init_services(n);
 
   // Set up loop rates
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(20);
 
-  ROS_INFO("==== Aircraft Positioning Node Test ====");
+  ROS_INFO("==== Aircraft Positioning Test Node ====");
 
   setMessageRate(mavlink::common::msg::GPS_GLOBAL_ORIGIN::MSG_ID,   1.0f); // GPS_GLOBAL_ORIGIN (mavros/global_postion/gp_offset)
   setMessageRate(mavlink::common::msg::ATTITUDE::MSG_ID,           50.0f); // ATTITUDE (mavros/imu/data) 
@@ -40,45 +44,61 @@ int main(int argc, char **argv) {
     double Y = sin(_counter/100.0)*(30.0);
     double Z = 15.0 + 5.0*sin(3*_counter/100.0);
 
+    // Attitude Targets
+    double roll = 5.0/57.3, pitch = 0;
+    double yaw = (double) _counter/100.0;
+    double thrust = 0.50;
+
     // Convert to Lat/Lon
  	double lat, lon, alt;
  	XY_to_latlon(X, Y, &lat, &lon);
     alt = Z;
 
     // Send the command
-    //publish_local_target(X,Y,Z);
-    //publish_global_target(lat, lon, alt);
-
-   
-    if (positionMode == positionModeEnum::global)
+    switch (commandMode)
     {
-        publish_global_target(lat, lon, alt);
-    }
-    else
-    {
-        publish_local_target(X,Y,Z);
+        case (commandModeEnum::attitude) :
+            publish_attitude_target(roll,pitch,yaw,thrust);
+            break;
+        
+        case (commandModeEnum::global) :
+            publish_global_target(lat, lon, alt);
+            break;
+
+        case (commandModeEnum::local) :
+            publish_local_target(X,Y,Z);
+            break;
+    
+        default :
+            // do nothing
+            break;
+
     }
 
-
-    if ((_counter % 200) == 0) {
-        switch (positionMode)
+    // Switch between each of the control modes
+    if ((_counter % 400) == 0) {
+        switch (commandMode)
         {
-        case (positionModeEnum::local) :
-            positionMode = global;
+
+        case (commandModeEnum::attitude) :
+            commandMode = local;
+            ROS_INFO("Switching to Local  Positioning Mode");
+            break;
+        
+        case (commandModeEnum::local) :
+            commandMode = global;
             ROS_INFO("Switching to Global Positioning Mode");
             break;
 
-            case (positionModeEnum::global) :
-            positionMode = local;
-            ROS_INFO("Switching to Local  Positioning Mode");
+        case (commandModeEnum::global) :
+            commandMode = attitude;
+            ROS_INFO("Switching to Attitude           Mode");
             break;
         
         default:
             break;
         }
-    }
-
-    
+    }   
 
     // Debugging
     //printf("Commanded Position: (Lat: %6.2f, Lon: %6.2f, Alt: %6.2f)\n",

@@ -1,14 +1,22 @@
 #include "ros_uav_command/testPositioning.h"
 
+#include "mavros_msgs/GlobalPositionTarget.h"
+#include "mavros_msgs/PositionTarget.h"
+#include "mavros_msgs/AttitudeTarget.h"
+#include "geometry_msgs/PoseStamped.h"
+
 // Publishers
 ros::Publisher globalPositionTarget_pub;
 ros::Publisher localPositionTarget_pub;
+ros::Publisher attitudeTarget_pub;
 
 void init_publishers(ros::NodeHandle n) {
 
   // Init all the publishers
   globalPositionTarget_pub = n.advertise<mavros_msgs::GlobalPositionTarget>("uav1/mavros/setpoint_raw/global", 5);
   localPositionTarget_pub  = n.advertise<mavros_msgs::PositionTarget>      ("uav1/mavros/setpoint_raw/local" , 5);
+  attitudeTarget_pub       = n.advertise<mavros_msgs::AttitudeTarget>      ("uav1/mavros/setpoint_raw/attitude", 5);
+  //attitudeTarget_pub       = n.advertise<geometry_msgs::PoseStamped>      ("uav1/mavros/setpoint_attitude/attitude", 5);
 
   return;
 
@@ -128,5 +136,47 @@ void publish_local_target(double x, double y, double alt) {
     // printf("Commanded Position: (%6.2f, %6.2f, %6.2f)\n",
     //      msg.position.x,msg.position.y,msg.position.z);
 
+    return;
+}
+
+void publish_attitude_target(double roll, double pitch, double yaw, double thrust) {
+   
+    // Publishes a local target.  Requires a heading
+    static uint32_t seq = 0;
+
+    mavros_msgs::AttitudeTarget msg;
+
+    // Fill in the header
+    msg.header.stamp = ros::Time::now();
+    msg.header.seq = seq++;
+    msg.header.frame_id = "world";
+    
+    // Type Mask
+    msg.type_mask = 
+          mavros_msgs::AttitudeTarget::IGNORE_ROLL_RATE     // Rates not supported on ardupilot
+        + mavros_msgs::AttitudeTarget::IGNORE_PITCH_RATE
+        + mavros_msgs::AttitudeTarget::IGNORE_YAW_RATE
+        //+ mavros_msgs::AttitudeTarget::IGNORE_THRUST
+        //+ mavros_msgs::AttitudeTarget::IGNORE_ATTITUDE
+        ;
+
+    // Orientation (convert from RPY into quaternion)
+    tf2::Quaternion q_target;
+    q_target.setRPY(roll, pitch, yaw);
+    tf2::convert(q_target,msg.orientation);
+
+    // Body Rate
+    msg.body_rate.x = 0.0; // Body rates not supported
+    msg.body_rate.y = 0.0;
+    msg.body_rate.z = 0.0;
+
+    // Velocity
+    msg.thrust = thrust;  // GUID_OPTIONS = 0 | 0: decend max rate, 0.5: hold alt, 1.0: ascend max rate
+                          // GUID_OPTIONS = 7 | [0,1] direct throttle output
+
+    // Publish the message
+    attitudeTarget_pub.publish(msg);
+
+    // All done
     return;
 }

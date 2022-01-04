@@ -1,6 +1,11 @@
 
 #include "ros_uav_command/testPositioning.h"
 
+#include "mavros_msgs/SetMode.h" 
+#include "mavros_msgs/CommandLong.h"
+#include "mavros_msgs/CommandCode.h"
+#include "mavros_msgs/MessageInterval.h"
+
 // We can find services and call them through rqt > Service Caller
 
 // === Globals
