@@ -57,11 +57,11 @@ target_link_libraries(setRates
 )
 
 # VRPN dummy test
-add_executable(vrpnDummy
-  src/vrpnDummy.cpp
+add_executable(mocapDummy
+  src/mocapDummy.cpp
 ) 
 
-target_link_libraries(vrpnDummy
+target_link_libraries(mocapDummy
   ${roscpp_LIBRARIES}
   ${std_msgs_LIBRARIES}
   ${catkin_LIBRARIES}

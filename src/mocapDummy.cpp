@@ -1,5 +1,5 @@
 
-// Script to provide dummy VRPN (MOCAP) data for testing
+// Script to provide dummy MOCAP (Vicon/Optitrack) data for testing
 //
 // Matt Anderson, 2022
 
@@ -8,22 +8,22 @@
 
 #include <math.h>
 
-ros::Publisher vrpnDummy_pub;
+ros::Publisher mocapDummy_pub;
 
 // Node for handling navigation around fumaroles
 int main(int argc, char **argv) {
 
   // Initialise ROS
-  ros::init(argc, argv, "vrpn_dummy");
+  ros::init(argc, argv, "mocap_dummy");
   ros::NodeHandle n;
 
   // Initialise Publishers
-  vrpnDummy_pub = n.advertise<geometry_msgs::PoseStamped>("/mavros/vision_pose/pose", 1);
+  mocapDummy_pub = n.advertise<geometry_msgs::PoseStamped>("/mavros/vision_pose/pose", 1);
  
   // Set up loop rates
   ros::Rate loop_rate(10);
 
-  ROS_INFO("==== VRPN Dummy Node ====");
+  ROS_INFO("==== MOCAP Dummy Node ====");
 
   // ROS Loop
   while (ros::ok()) {
@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
     msg.pose.orientation.w = 1.0;
     
     // Publish the message
-    vrpnDummy_pub.publish(msg);
+    mocapDummy_pub.publish(msg);
 
     // Give ROS time to do it's thing
     ros::spinOnce();
@@ -59,5 +59,5 @@ int main(int argc, char **argv) {
   }
 
   return 0;
-  
+
 }
