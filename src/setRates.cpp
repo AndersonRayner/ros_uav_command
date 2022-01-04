@@ -1,3 +1,6 @@
+// Script for demonstating how to set mavlink message rates using ROS
+//
+// Matt Anderson, 2022
 
 // ROS Headers
 #include "ros/ros.h"

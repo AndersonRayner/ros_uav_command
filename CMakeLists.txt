@@ -55,3 +55,14 @@ target_link_libraries(setRates
   ${std_msgs_LIBRARIES}
   ${catkin_LIBRARIES}
 )
+
+# VRPN dummy test
+add_executable(vrpnDummy
+  src/vrpnDummy.cpp
+) 
+
+target_link_libraries(vrpnDummy
+  ${roscpp_LIBRARIES}
+  ${std_msgs_LIBRARIES}
+  ${catkin_LIBRARIES}
+)

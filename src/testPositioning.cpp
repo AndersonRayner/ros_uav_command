@@ -1,9 +1,10 @@
 
-#include "ros_uav_command/testPositioning.h"
 // Script to demonstrate different ways of commanding an ArduPilot 
 // through ROS.
 //
 // Matt Anderson, 2021
+
+#include "ros_uav_command/testPositioning.h"
 
 uint _counter = 0;
 

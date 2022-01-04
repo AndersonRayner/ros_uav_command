@@ -1,0 +1,5 @@
+<launch>
+        <!-- Start the Node -->
+        <node pkg="ros_uav_command" type="vrpnDummy" name="vrpnDummyTest" />
+
+</launch>
