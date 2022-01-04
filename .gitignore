@@ -1,0 +1,3 @@
+# vs-code ignores
+*.code-workspace
+*.vc.db*
