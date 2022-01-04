@@ -27,3 +27,6 @@ Cycles through control via `MAV_FRAME_LOCAL_NED`, `MAV_FRAME_GLOBAL_RELATIVE_ALT
 ```
 roslaunch ros_uav_command testPositioning.launch
 ```
+
+## Contributions
+As always, PRs welcome!
