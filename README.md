@@ -28,5 +28,12 @@ Cycles through control via `MAV_FRAME_LOCAL_NED`, `MAV_FRAME_GLOBAL_RELATIVE_ALT
 roslaunch ros_uav_command testPositioning.launch
 ```
 
+### MOCAP Dummy
+A dummy script for generating fake motion capture data, emulating a VICON/Optitrack system.
+This allows testing of codes to make sure that flight controller EKFs accept mocap data.
+```
+roslaunch ros_uav_command mocapDummy.launch
+```
+
 ## Contributions
 As always, PRs welcome!
