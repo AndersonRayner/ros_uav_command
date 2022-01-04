@@ -15,7 +15,7 @@ sudo apt install -y ros-noetic-mavros ros-noetic-mavros-extras
 ## Nodes
 ### Set Rates
 Demonstration of how to write a script to set the telemetry rates for a flight controller.
-The node sends the commands via the `CMD_LONG` interface, waits for confirmation that it was successful, then exists the code.
+The node sends the commands via the `COMMAND_LONG` interface, waits for confirmation that it was successful, then exists the code.
 ```
 roslaunch ros_uav_command setRates.launch
 ```
@@ -23,7 +23,7 @@ roslaunch ros_uav_command setRates.launch
 ### Test Positioning
 Demonstration of controlling a UAV using ROS.
 Sends the setpoints via the `setpoint_raw` command, allowing a deeper level of control.
-Cycles through control via `SET_POSITION_TARGET_LOCAL_NED`, `SET_POSITION_TARGET_GLOBAL`, and raw attitude commands.
+Cycles through control via `MAV_FRAME_LOCAL_NED`, `MAV_FRAME_GLOBAL_RELATIVE_ALT`, and raw attitude commands.
 ```
 roslaunch ros_uav_command testPositioning.launch
 ```
