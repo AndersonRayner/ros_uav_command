@@ -15,9 +15,9 @@ ros::ServiceClient commandLongClient;
 ros::ServiceClient setMessageRateClient;
 
 void init_services(ros::NodeHandle n) {
-  setModeClient        = n.serviceClient<mavros_msgs::SetMode>("uav1/mavros/set_mode");
-  commandLongClient    = n.serviceClient<mavros_msgs::CommandLong>("uav1/mavros/cmd/command");
-  setMessageRateClient = n.serviceClient<mavros_msgs::MessageInterval>("uav1/mavros/set_message_interval");
+  setModeClient        = n.serviceClient<mavros_msgs::SetMode>("mavros/set_mode");
+  commandLongClient    = n.serviceClient<mavros_msgs::CommandLong>("mavros/cmd/command");
+  setMessageRateClient = n.serviceClient<mavros_msgs::MessageInterval>("mavros/set_message_interval");
 }
 
 bool setMessageRate(uint32_t msg_id, float rate) {

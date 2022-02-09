@@ -3,7 +3,6 @@
 #include "mavros_msgs/GlobalPositionTarget.h"
 #include "mavros_msgs/PositionTarget.h"
 #include "mavros_msgs/AttitudeTarget.h"
-#include "geometry_msgs/PoseStamped.h"
 
 // Publishers
 ros::Publisher globalPositionTarget_pub;
@@ -13,10 +12,9 @@ ros::Publisher attitudeTarget_pub;
 void init_publishers(ros::NodeHandle n) {
 
   // Init all the publishers
-  globalPositionTarget_pub = n.advertise<mavros_msgs::GlobalPositionTarget>("uav1/mavros/setpoint_raw/global", 5);
-  localPositionTarget_pub  = n.advertise<mavros_msgs::PositionTarget>      ("uav1/mavros/setpoint_raw/local" , 5);
-  attitudeTarget_pub       = n.advertise<mavros_msgs::AttitudeTarget>      ("uav1/mavros/setpoint_raw/attitude", 5);
-  //attitudeTarget_pub       = n.advertise<geometry_msgs::PoseStamped>      ("uav1/mavros/setpoint_attitude/attitude", 5);
+  globalPositionTarget_pub = n.advertise<mavros_msgs::GlobalPositionTarget>("mavros/setpoint_raw/global", 5);
+  localPositionTarget_pub  = n.advertise<mavros_msgs::PositionTarget>      ("mavros/setpoint_raw/local" , 5);
+  attitudeTarget_pub       = n.advertise<mavros_msgs::AttitudeTarget>      ("mavros/setpoint_raw/attitude", 5);
 
   return;
 

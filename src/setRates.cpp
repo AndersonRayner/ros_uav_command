@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
 
   // Initialise Services
-  setMessageRateClient = n.serviceClient<mavros_msgs::MessageInterval>("uav1/mavros/set_message_interval");
+  setMessageRateClient = n.serviceClient<mavros_msgs::MessageInterval>("mavros/set_message_interval");
 
   // Set up loop rates
   ros::Rate loop_rate(1);

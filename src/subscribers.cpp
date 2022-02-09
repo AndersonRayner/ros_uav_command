@@ -16,8 +16,8 @@ void init_subscribers(ros::NodeHandle n)
 {
 
   // Initialise subscribers
-  homePositionSub = n.subscribe("uav1/mavros/home_position/home"  , 1, homePosition_callback);
-  gpOriginSub = n.subscribe("uav1/mavros/global_position/gp_origin", 1, gpOrigin_callback);
+  homePositionSub = n.subscribe("mavros/home_position/home"       , 1, homePosition_callback);
+  gpOriginSub     = n.subscribe("mavros/global_position/gp_origin", 1, gpOrigin_callback);
 
   return;
 }
