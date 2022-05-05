@@ -12,6 +12,13 @@ Requires mavros and mavros-extras
 sudo apt install -y ros-noetic-mavros ros-noetic-mavros-extras
 ```
 
+## Building the Code
+### Cloning the Package
+Add this repo to any pre-exisiting ros workspace either as a static version (using `git clone`) or as a submodule (using `git submodule add`).
+
+### Building the Code
+The code should build exactly the same as any regular ros package, though has only been tested with catkin_tools and ros noetic.
+
 ## Nodes
 ### Set Rates
 Demonstration of how to write a script to set the telemetry rates for a flight controller.
