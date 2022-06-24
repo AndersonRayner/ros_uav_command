@@ -1,5 +1,6 @@
 <launch>
         <!-- Start the Node -->
-        <node pkg="ros_uav_command" type="testPositioning" name="positioningTest" />
-
+        <group ns="uav1">
+                <node pkg="ros_uav_command" type="positionControlExample" name="positionControlExampleTest" />
+        </group>
 </launch>

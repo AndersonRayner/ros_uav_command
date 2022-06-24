@@ -33,17 +33,6 @@ add_library(pkg_libraries
 )
 
 #===== Executables to generate
-# Positioning Test
-add_executable(testPositioning
-  src/testPositioning.cpp
-) 
-
-target_link_libraries(testPositioning
-  pkg_libraries
-  ${roscpp_LIBRARIES}
-  ${std_msgs_LIBRARIES}
-  ${catkin_LIBRARIES}
-)
 
 # Set rates test
 add_executable(setRates
@@ -62,6 +51,30 @@ add_executable(mocapDummy
 ) 
 
 target_link_libraries(mocapDummy
+  ${roscpp_LIBRARIES}
+  ${std_msgs_LIBRARIES}
+  ${catkin_LIBRARIES}
+)
+
+# Position Control Example Test
+add_executable(positionControlExample
+  src/positionControlExample.cpp
+) 
+
+target_link_libraries(positionControlExample
+  pkg_libraries
+  ${roscpp_LIBRARIES}
+  ${std_msgs_LIBRARIES}
+  ${catkin_LIBRARIES}
+)
+
+# Simple Mission Test
+add_executable(simpleMission
+  src/simpleMission.cpp
+) 
+
+target_link_libraries(simpleMission
+  pkg_libraries
   ${roscpp_LIBRARIES}
   ${std_msgs_LIBRARIES}
   ${catkin_LIBRARIES}
