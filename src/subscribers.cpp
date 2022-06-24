@@ -1,6 +1,8 @@
-#include "ros_uav_command/testPositioning.h"
+
+#include "ros/ros.h"
 
 #include <math.h>
+
 #include "mavros_msgs/HomePosition.h"
 #include "geographic_msgs/GeoPointStamped.h"
 
@@ -11,6 +13,9 @@ ros::Subscriber gpOriginSub;
 // Callbacks
 void homePosition_callback(const mavros_msgs::HomePosition::ConstPtr& msg);
 void gpOrigin_callback(const geographic_msgs::GeoPointStamped::ConstPtr &msg);
+
+// Globabls
+geographic_msgs::GeoPoint _ekfOrigin;
 
 void init_subscribers(ros::NodeHandle n)
 {

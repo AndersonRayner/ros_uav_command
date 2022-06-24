@@ -1,6 +1,7 @@
-#include "ros_uav_command/testPositioning.h"
 
-geographic_msgs::GeoPoint _ekfOrigin;
+#include "geographic_msgs/GeoPoint.h"
+
+extern geographic_msgs::GeoPoint _ekfOrigin;
 
 void latlon_to_XY(double lat, double lon, double *X, double *Y) {
   // Convert lat/lon to NE

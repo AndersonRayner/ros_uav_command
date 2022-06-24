@@ -4,7 +4,7 @@
 //
 // Matt Anderson, 2021
 
-#include "ros_uav_command/testPositioning.h"
+#include "ros_uav_command/ros_uav_command.h"
 
 uint _counter = 0;
 

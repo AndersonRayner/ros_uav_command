@@ -1,8 +1,12 @@
-#include "ros_uav_command/testPositioning.h"
+#include "ros/ros.h"
 
+#include <mavlink/v2.0/common/common.hpp>
 #include "mavros_msgs/GlobalPositionTarget.h"
 #include "mavros_msgs/PositionTarget.h"
 #include "mavros_msgs/AttitudeTarget.h"
+
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 // Publishers
 ros::Publisher globalPositionTarget_pub;

@@ -1,6 +1,7 @@
 
-#include "ros_uav_command/testPositioning.h"
+#include "ros/ros.h"
 
+#include <mavlink/v2.0/common/common.hpp>
 #include "mavros_msgs/SetMode.h" 
 #include "mavros_msgs/CommandLong.h"
 #include "mavros_msgs/CommandCode.h"
