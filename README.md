@@ -1,6 +1,6 @@
 # ros_uav_command
-A collection of ROS nodes to test mavros interfacing between ROS and a UAV.
-Designed for Ardupilot, but will work with PX4 with minimal change.
+A collection of ROS1 nodes to test mavros interfacing between ROS and a UAV.
+Designed for Ardupilot, but will work with PX4 with minimal changes.
 
 ```
 https://github.com/AndersonRayner/ros_uav_command.git
