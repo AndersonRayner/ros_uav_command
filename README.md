@@ -12,6 +12,9 @@ Requires mavros and mavros-extras
 sudo apt install -y ros-noetic-mavros ros-noetic-mavros-extras
 ```
 
+It also requires that you have set up mavros correctly to interact with your vehicle (either real or simulated).
+You can use the [ros_uav_interfacing](https://github.com/AndersonRayner/ros_uav_interfacing) repo or the [ArduPilot ROS Interfacing Wiki](https://ardupilot.org/dev/docs/ros-sitl.html) for more details.
+
 ## Building the Code
 ### Cloning the Package
 Add this repo to any pre-exisiting ros workspace either as a static version (using `git clone`) or as a submodule (using `git submodule add`).
