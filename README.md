@@ -49,3 +49,11 @@ roslaunch ros_uav_command mocapDummy.launch
 
 ## Contributions
 As always, PRs welcome!
+
+## Citation
+If you found this repo useful and feel like citing this work, please use:
+```
+Matthew Anderson, Kai Lehmkuehler, Jeremy Randle, K.C. Wong and Soon-Jo Chung
+"UAS Flight Testing in Support of Research for Academia: Lessons and Experiences from the Field"
+AIAA SciTech Forum 2023, National Harbor, MD, January 2023.
+```
